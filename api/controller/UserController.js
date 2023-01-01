@@ -33,7 +33,7 @@ class UserController {
     }
 
     static async login(req, res) {
-        let data = await User.findOne({ email: req.body.email });
+        let data = await User.findOne({ where: { email: req.body.email, userType: "user" } });
         try {
 
             if (!data) {
@@ -52,6 +52,7 @@ class UserController {
 
                     let token = jwtConvert.sign({
                         email: req.body.email,
+                        userType: "user",
                         created_at: data.created_at
                     });
 
@@ -83,7 +84,7 @@ class UserController {
         let riwayatPend = req.body.riwayatPendidikan
         let riwayatPek = req.body.riwayatPekerjaan
         let riwayatPelatihan = req.body.riwayatPelatihan
-        const checkUser = await User.findOne({ email: req.user.email })
+        const checkUser = await User.findOne({ where: { email: req.user.email } })
         try {
             let postBiodata = {
                 user_id: checkUser.id,
@@ -147,64 +148,45 @@ class UserController {
         }
     }
 
-    static async getBiodata(req, res) {
-        let riwayatPend = req.body.riwayatPendidikan
-        let riwayatPek = req.body.riwayatPekerjaan
-        let riwayatPelatihan = req.body.riwayatPelatihan
-        try {
-            let postBiodata = {
-                name: req.body.name,
-                ktp: req.body.ktp,
-                pob: req.body.pob,
-                gender: req.body.pob,
-                blood: req.body.name,
-                religion: req.body.ktp,
-                email: req.body.pob,
-                telephone: req.body.pob,
-                person: req.body.name,
-                status: req.body.ktp,
-                position: req.body.pob,
-                address_ktp: req.body.pob,
-                address: req.body.name,
-                skill: req.body.ktp,
-                place_work: req.body.pob,
-                income: req.body.pob,
-            }
-            const data = await User.create(postBiodata)
+    static async getMyBiodata(req, res) {
 
-            for (let pend of riwayatPend) {
-                let postPendidikan = {
-                    biodata_id: postBiodata.id,
-                    level_education: pend.level_education,
-                    institute: pend.institute,
-                    major: pend.major,
-                    year: pend.year,
-                }
-                const savePendidikan = await Pendidikan.create(postPendidikan)
+        let checkUser = await User.findOne({
+
+            include: [{
+                model: Biodata,
+                as: 'biodata',
+                required: false,
+                include: [{
+                        model: Pelatihan,
+                        required: false
+
+                    },
+                    {
+                        model: Pekerjaan,
+                        required: false
+
+                    },
+                    {
+                        model: Pendidikan,
+                        required: false
+
+                    }
+                ],
+            }],
+            where: { email: req.user.email },
+            attributes: ['id', 'name', 'email']
+        })
+        try {
+            if (!checkUser) {
+                throw ({
+                    message: 'User not found'
+                })
             }
-            for (let pek of riwayatPek) {
-                let postPekerjaan = {
-                    biodata_id: postBiodata.id,
-                    company: pek.company,
-                    position: pek.position,
-                    income: pek.income,
-                    year: pek.year,
-                }
-                const savePekerjaan = await Pekerjaan.create(postPekerjaan)
-            }
-            for (let pel of riwayatPelatihan) {
-                let postPelatihan = {
-                    biodata_id: postBiodata.id,
-                    course: pel.course,
-                    certificate: pel.certificate,
-                    year: pek.year,
-                }
-                const savePelatihan = await Pelatihan.create(postPelatihan)
-            }
+
 
             res.status(200).json({
                 message: 'Success',
-                data: data
+                data: checkUser
             });
 
         } catch (error) {

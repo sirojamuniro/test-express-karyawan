@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            this.hasOne(models.biodata, {
+                foreignKey: 'user_id',
+                target: 'id',
+                as: 'biodata',
+            })
         }
     }
     User.init({
@@ -25,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true
         },
         userType: {
             type: DataTypes.ENUM(['admin', 'user']),

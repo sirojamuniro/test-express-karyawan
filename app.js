@@ -44,7 +44,7 @@ app.listen(port, IP, () => {
 
 // // // Sync database
 // db.sequelize.sync();
-db.sequelize.sync({ alter: true });
+// db.sequelize.sync({ alter: true });
 // db.PostCode.destroy({ where: {}, truncate: true })
 // db.PostCode.bulkCreate(excel())
 

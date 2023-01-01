@@ -6,8 +6,7 @@ const Pekerjaan = Model.riwayat_pekerjaan;
 const Pendidikan = Model.riwayat_pendidikan;
 const bcrypt = require('bcrypt');
 const jwtConvert = require('../helpers/jwtConvert');
-
-
+const { checkPagination, paginationMetaData } = require('../helpers/check-pagination');
 class AdminController {
     static async register(req, res) {
 
@@ -17,6 +16,7 @@ class AdminController {
             let post = {
                 name: req.body.name,
                 email: req.body.email,
+                userType: "admin",
                 password: password,
             }
 
@@ -33,12 +33,12 @@ class AdminController {
     }
 
     static async login(req, res) {
-        let data = await User.findOne({ email: req.body.email });
+        let data = await User.findOne({ where: { email: req.body.email, userType: "admin" } });
         try {
 
             if (!data) {
                 throw ({
-                    message: 'User not found'
+                    message: 'Admin not found'
                 })
 
             }
@@ -52,6 +52,7 @@ class AdminController {
 
                     let token = jwtConvert.sign({
                         email: req.body.email,
+                        userType: "admin",
                         created_at: data.created_at
                     });
 
@@ -79,132 +80,54 @@ class AdminController {
         }
     }
 
-    static async registerBiodata(req, res) {
-        let riwayatPend = req.body.riwayatPendidikan
-        let riwayatPek = req.body.riwayatPekerjaan
-        let riwayatPelatihan = req.body.riwayatPelatihan
-        const checkUser = await User.findOne({ email: req.user.email })
+    static async getFormAllUser(req, res) {
+        let { limit, page } = req.query
+        const {
+            limit: pLimit,
+            offset
+        } = checkPagination({ limit, page })
+        const {
+            count,
+            rows: data
+        } = await Biodata.findAndCountAll({
+            distinct: true,
+            include: [{
+                    model: User,
+                    attributes: ['id', 'name', 'email']
+                },
+                {
+                    model: Pelatihan,
+                    required: false
+                },
+                {
+                    model: Pekerjaan,
+                    required: false
+                },
+                {
+                    model: Pendidikan,
+                    required: false
+                },
+            ],
+            limit: pLimit,
+            offset,
+        })
+
+
         try {
-            let postBiodata = {
-                user_id: checkUser.id,
-                name: req.body.name,
-                ktp: req.body.ktp,
-                pob: req.body.pob,
-                gender: req.body.gender,
-                blood: req.body.blood,
-                religion: req.body.religion,
-                email: req.body.email,
-                telephone: req.body.telephone,
-                person: req.body.person,
-                status: req.body.status,
-                position: req.body.position,
-                address_ktp: req.body.address_ktp,
-                address: req.body.address,
-                skill: req.body.skill,
-                place_work: req.body.place_work,
-                income: req.body.income,
-            }
-            const data = await Biodata.create(postBiodata)
+            const metaData = paginationMetaData({
+                limit: pLimit,
+                offset,
+                page,
+                count
+            })
+            console.log('ini metadata', metaData)
+            console.log('ini data', data)
 
-            for (let pend of riwayatPend) {
-                let postPendidikan = {
-                    biodata_id: data.id,
-                    level_education: pend.level_education,
-                    institute: pend.institute,
-                    major: pend.major,
-                    year: pend.year,
-                }
-                const savePendidikan = await Pendidikan.create(postPendidikan)
-            }
-            for (let pek of riwayatPek) {
-                let postPekerjaan = {
-                    biodata_id: data.id,
-                    company: pek.company,
-                    position: pek.position,
-                    income: pek.income,
-                    year: pek.year,
-                }
-                const savePekerjaan = await Pekerjaan.create(postPekerjaan)
-            }
-            for (let pel of riwayatPelatihan) {
-                let postPelatihan = {
-                    biodata_id: data.id,
-                    course: pel.course,
-                    certificate: pel.certificate,
-                    year: pel.year,
-                }
-                const savePelatihan = await Pelatihan.create(postPelatihan)
-            }
-
-            res.status(200).json({
+            res.status(200).send({
                 message: 'Success',
-                data: data
-            });
+                pagination: metaData,
+                data: data,
 
-        } catch (error) {
-
-            res.status(400).send({ status: "Error", errors: [{ message: error.message }] })
-        }
-    }
-
-    static async getBiodata(req, res) {
-        let riwayatPend = req.body.riwayatPendidikan
-        let riwayatPek = req.body.riwayatPekerjaan
-        let riwayatPelatihan = req.body.riwayatPelatihan
-        try {
-            let postBiodata = {
-                name: req.body.name,
-                ktp: req.body.ktp,
-                pob: req.body.pob,
-                gender: req.body.pob,
-                blood: req.body.name,
-                religion: req.body.ktp,
-                email: req.body.pob,
-                telephone: req.body.pob,
-                person: req.body.name,
-                status: req.body.ktp,
-                position: req.body.pob,
-                address_ktp: req.body.pob,
-                address: req.body.name,
-                skill: req.body.ktp,
-                place_work: req.body.pob,
-                income: req.body.pob,
-            }
-            const data = await User.create(postBiodata)
-
-            for (let pend of riwayatPend) {
-                let postPendidikan = {
-                    biodata_id: postBiodata.id,
-                    level_education: pend.level_education,
-                    institute: pend.institute,
-                    major: pend.major,
-                    year: pend.year,
-                }
-                const savePendidikan = await Pendidikan.create(postPendidikan)
-            }
-            for (let pek of riwayatPek) {
-                let postPekerjaan = {
-                    biodata_id: postBiodata.id,
-                    company: pek.company,
-                    position: pek.position,
-                    income: pek.income,
-                    year: pek.year,
-                }
-                const savePekerjaan = await Pekerjaan.create(postPekerjaan)
-            }
-            for (let pel of riwayatPelatihan) {
-                let postPelatihan = {
-                    biodata_id: postBiodata.id,
-                    course: pel.course,
-                    certificate: pel.certificate,
-                    year: pek.year,
-                }
-                const savePelatihan = await Pelatihan.create(postPelatihan)
-            }
-
-            res.status(200).json({
-                message: 'Success',
-                data: data
             });
 
         } catch (error) {

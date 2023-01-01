@@ -9,7 +9,7 @@ router.post('/register', user.register);
 router.post('/login', user.login);
 
 router.post('/registerBiodata', auth.auth, user.registerBiodata);
-router.get('/biodata', auth.auth, user.getBiodata);
+router.get('/biodata', auth.auth, user.getMyBiodata);
 
 
 module.exports = router;
