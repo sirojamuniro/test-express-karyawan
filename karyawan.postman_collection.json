@@ -1,0 +1,653 @@
+{
+	"info": {
+		"_postman_id": "c11a30f5-83e0-4da0-acc7-1c92a0e3d8e2",
+		"name": "karyawan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8967658"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"tanakakujira\",\r\n    \"email\":\"munirosiroja@gmail.com\",\r\n    \"password\":\"1234567\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Biodata USER",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11bmlyb3Npcm9qYUBnbWFpbC5jb20iLCJpYXQiOjE2NzIzNjQ5MDMsImV4cCI6MTY3Mjc5NjkwM30.epIrTTxVE5zXuBUb3l2rsX5cQEhibhoQeiin4yg2gas",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"sirojamuniro\",\n    \"ktp\":\"3404020102\",\n     \"gender\" : \"laki-laki\",\n    \"blood\":\"B\",\n     \"religion\" : \"Islam\",\n    \"email\":\"munirosiroja@gmail.com\",\n     \"telephone\" : \"085929929922\",\n    \"person\":\"datok sri\",\n     \"status\" : \"menikah\",\n    \"position\":\"backend developer\",\n     \"address_ktp\" : \"somodaran\",\n    \"address\":\"somodaran\",\n     \"skill\" : \"backend developer\",\n    \"place_work\":\"tidak\",\n     \"income\" : \"6000000\",\n     \"riwayatPendidikan\":[\n         {\n             \"level_education\":\"sarjana 1\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2020\"\n         },\n          {\n             \"level_education\":\"sarjana 2\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2024\"\n         }\n     ],\n     \"riwayatPekerjaan\":[\n         {\n             \"company\":\"Cranium\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"6000000\",\n             \"year\":\"2023\"\n         },\n          {\n             \"company\":\"PT EDI\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"12000000\",\n             \"year\":\"2023-sekarang\"\n         }\n     ],\n       \"riwayatPelatihan\":[\n         {\n             \"course\":\"Ethical Hacking X-Code\",\n             \"certificate\":\"122212\",\n             \"year\":\"2018\"\n         }\n     ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/registerBiodata",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"registerBiodata"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register Biodata USER",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"sirojamuniro\",\n    \"ktp\":\"3404020102\",\n     \"gender\" : \"laki-laki\",\n    \"blood\":\"B\",\n     \"religion\" : \"Islam\",\n    \"email\":\"munirosiroja@gmail.com\",\n     \"telephone\" : \"085929929922\",\n    \"person\":\"datok sri\",\n     \"status\" : \"menikah\",\n    \"position\":\"backend developer\",\n     \"address_ktp\" : \"somodaran\",\n    \"address\":\"somodaran\",\n     \"skill\" : \"backend developer\",\n    \"place_work\":\"tidak\",\n     \"income\" : \"6000000\",\n     \"riwayatPendidikan\":[\n         {\n             \"level_education\":\"sarjana 1\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2020\"\n         },\n          {\n             \"level_education\":\"sarjana 2\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2024\"\n         }\n     ],\n     \"riwayatPekerjaan\":[\n         {\n             \"company\":\"Cranium\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"6000000\",\n             \"year\":\"2023\"\n         },\n          {\n             \"company\":\"PT EDI\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"12000000\",\n             \"year\":\"2023-sekarang\"\n         }\n     ],\n       \"riwayatPelatihan\":[\n         {\n             \"course\":\"Ethical Hacking X-Code\",\n             \"certificate\":\"122212\",\n             \"year\":\"2018\"\n         }\n     ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/registerBiodata",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"registerBiodata"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "389"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"185-6g5O7B2JcwN7hkz3NhunslAKXv0\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Dec 2022 02:06:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 4,\n        \"user_id\": 1,\n        \"name\": \"sirojamuniro\",\n        \"ktp\": \"3404020102\",\n        \"gender\": \"laki-laki\",\n        \"blood\": \"B\",\n        \"religion\": \"Islam\",\n        \"email\": \"munirosiroja@gmail.com\",\n        \"telephone\": \"085929929922\",\n        \"person\": \"datok sri\",\n        \"status\": \"menikah\",\n        \"position\": \"backend developer\",\n        \"address_ktp\": \"somodaran\",\n        \"address\": \"somodaran\",\n        \"skill\": \"backend developer\",\n        \"place_work\": \"tidak\",\n        \"income\": \"6000000\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "POST LOGIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\" : \"munirosiroja@gmail.com\",\n    \"password\":\"1234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST LOGIN",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"munirosiroja@gmail.com\",\n    \"password\":\"1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "204"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"cc-E2Xy2rWaYp3lKmSzpdIwMHRrGz0\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Dec 2022 02:17:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Success\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11bmlyb3Npcm9qYUBnbWFpbC5jb20iLCJpYXQiOjE2NzIzNjY2NTcsImV4cCI6MTY3Mjc5ODY1N30.28n32bXf2j3tolx5211FcBnHcRwu5vrWpstexryO5_Q\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get Biodata USER",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11bmlyb3Npcm9qYUBnbWFpbC5jb20iLCJpYXQiOjE2NzIzNjQ5MDMsImV4cCI6MTY3Mjc5NjkwM30.epIrTTxVE5zXuBUb3l2rsX5cQEhibhoQeiin4yg2gas",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"sirojamuniro\",\n    \"ktp\":\"3404020102\",\n     \"gender\" : \"laki-laki\",\n    \"blood\":\"B\",\n     \"religion\" : \"Islam\",\n    \"email\":\"munirosiroja@gmail.com\",\n     \"telephone\" : \"085929929922\",\n    \"person\":\"datok sri\",\n     \"status\" : \"menikah\",\n    \"position\":\"backend developer\",\n     \"address_ktp\" : \"somodaran\",\n    \"address\":\"somodaran\",\n     \"skill\" : \"backend developer\",\n    \"place_work\":\"tidak\",\n     \"income\" : \"6000000\",\n     \"riwayatPendidikan\":[\n         {\n             \"level_education\":\"sarjana 1\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2020\"\n         },\n          {\n             \"level_education\":\"sarjana 2\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2024\"\n         }\n     ],\n     \"riwayatPekerjaan\":[\n         {\n             \"company\":\"Cranium\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"6000000\",\n             \"year\":\"2023\"\n         },\n          {\n             \"company\":\"PT EDI\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"12000000\",\n             \"year\":\"2023-sekarang\"\n         }\n     ],\n       \"riwayatPelatihan\":[\n         {\n             \"course\":\"Ethical Hacking X-Code\",\n             \"certificate\":\"122212\",\n             \"year\":\"2018\"\n         }\n     ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/biodata",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"biodata"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get Biodata USER",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"sirojamuniro\",\n    \"ktp\":\"3404020102\",\n     \"gender\" : \"laki-laki\",\n    \"blood\":\"B\",\n     \"religion\" : \"Islam\",\n    \"email\":\"munirosiroja@gmail.com\",\n     \"telephone\" : \"085929929922\",\n    \"person\":\"datok sri\",\n     \"status\" : \"menikah\",\n    \"position\":\"backend developer\",\n     \"address_ktp\" : \"somodaran\",\n    \"address\":\"somodaran\",\n     \"skill\" : \"backend developer\",\n    \"place_work\":\"tidak\",\n     \"income\" : \"6000000\",\n     \"riwayatPendidikan\":[\n         {\n             \"level_education\":\"sarjana 1\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2020\"\n         },\n          {\n             \"level_education\":\"sarjana 2\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2024\"\n         }\n     ],\n     \"riwayatPekerjaan\":[\n         {\n             \"company\":\"Cranium\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"6000000\",\n             \"year\":\"2023\"\n         },\n          {\n             \"company\":\"PT EDI\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"12000000\",\n             \"year\":\"2023-sekarang\"\n         }\n     ],\n       \"riwayatPelatihan\":[\n         {\n             \"course\":\"Ethical Hacking X-Code\",\n             \"certificate\":\"122212\",\n             \"year\":\"2018\"\n         }\n     ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/biodata",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"biodata"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1440"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5a0-3XjnZRStY63Ck9oDjU8xr+yPVXo\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 31 Dec 2022 04:17:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Success\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"tanakakujira\",\n        \"email\": \"munirosiroja@gmail.com\",\n        \"biodata\": {\n            \"id\": 1,\n            \"user_id\": 1,\n            \"name\": \"sirojamuniro\",\n            \"ktp\": \"3404020102\",\n            \"pob\": null,\n            \"gender\": \"laki-laki\",\n            \"blood\": \"B\",\n            \"religion\": \"Islam\",\n            \"email\": \"munirosiroja@gmail.com\",\n            \"telephone\": \"085929929922\",\n            \"person\": \"datok sri\",\n            \"status\": \"menikah\",\n            \"position\": \"backend developer\",\n            \"address_ktp\": \"somodaran\",\n            \"address\": \"somodaran\",\n            \"skill\": \"backend developer\",\n            \"place_work\": \"tidak\",\n            \"income\": \"6000000\",\n            \"createdAt\": \"2022-12-31 11:11:49\",\n            \"updatedAt\": \"2022-12-31 11:11:49\",\n            \"riwayat_pelatihans\": [\n                {\n                    \"id\": 1,\n                    \"biodata_id\": 1,\n                    \"course\": \"Ethical Hacking X-Code\",\n                    \"certificate\": \"122212\",\n                    \"year\": \"2018\",\n                    \"createdAt\": \"2022-12-31 11:11:49\",\n                    \"updatedAt\": \"2022-12-31 11:11:49\"\n                }\n            ],\n            \"riwayat_pekerjaans\": [\n                {\n                    \"id\": 2,\n                    \"biodata_id\": 1,\n                    \"company\": \"PT EDI\",\n                    \"position\": \"Backend Developer\",\n                    \"income\": \"12000000\",\n                    \"year\": \"2023-sekarang\",\n                    \"createdAt\": null,\n                    \"updatedAt\": null\n                },\n                {\n                    \"id\": 1,\n                    \"biodata_id\": 1,\n                    \"company\": \"Cranium\",\n                    \"position\": \"Backend Developer\",\n                    \"income\": \"6000000\",\n                    \"year\": \"2023\",\n                    \"createdAt\": null,\n                    \"updatedAt\": null\n                }\n            ],\n            \"riwayat_pendidikans\": [\n                {\n                    \"id\": 2,\n                    \"biodata_id\": 1,\n                    \"level_education\": \"sarjana 2\",\n                    \"institute\": null,\n                    \"major\": \"Informatika\",\n                    \"year\": \"2024\",\n                    \"ipk\": null,\n                    \"createdAt\": \"2022-12-31 11:11:49\",\n                    \"updatedAt\": \"2022-12-31 11:11:49\"\n                },\n                {\n                    \"id\": 1,\n                    \"biodata_id\": 1,\n                    \"level_education\": \"sarjana 1\",\n                    \"institute\": null,\n                    \"major\": \"Informatika\",\n                    \"year\": \"2020\",\n                    \"ipk\": null,\n                    \"createdAt\": \"2022-12-31 11:11:49\",\n                    \"updatedAt\": \"2022-12-31 11:11:49\"\n                }\n            ]\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Register Admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"tanakakujira\",\r\n    \"email\":\"munirosiroja2@gmail.com\",\r\n    \"password\":\"1234567\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/admin/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Form All USER",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11bmlyb3Npcm9qYTJAZ21haWwuY29tIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTY3MjU0Mjk2MiwiZXhwIjoxNjcyOTc0OTYyfQ.IrMfSfKNm-P2Vr9kbrzXMrgLvso0vkdk2qv8VdVwMBw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"sirojamuniro\",\n    \"ktp\":\"3404020102\",\n     \"gender\" : \"laki-laki\",\n    \"blood\":\"B\",\n     \"religion\" : \"Islam\",\n    \"email\":\"munirosiroja@gmail.com\",\n     \"telephone\" : \"085929929922\",\n    \"person\":\"datok sri\",\n     \"status\" : \"menikah\",\n    \"position\":\"backend developer\",\n     \"address_ktp\" : \"somodaran\",\n    \"address\":\"somodaran\",\n     \"skill\" : \"backend developer\",\n    \"place_work\":\"tidak\",\n     \"income\" : \"6000000\",\n     \"riwayatPendidikan\":[\n         {\n             \"level_education\":\"sarjana 1\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2020\"\n         },\n          {\n             \"level_education\":\"sarjana 2\",\n             \"intitue\":\"Universitas Amikom Yogyakarta\",\n             \"major\":\"Informatika\",\n             \"year\":\"2024\"\n         }\n     ],\n     \"riwayatPekerjaan\":[\n         {\n             \"company\":\"Cranium\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"6000000\",\n             \"year\":\"2023\"\n         },\n          {\n             \"company\":\"PT EDI\",\n             \"position\":\"Backend Developer\",\n             \"income\":\"12000000\",\n             \"year\":\"2023-sekarang\"\n         }\n     ],\n       \"riwayatPelatihan\":[\n         {\n             \"course\":\"Ethical Hacking X-Code\",\n             \"certificate\":\"122212\",\n             \"year\":\"2018\"\n         }\n     ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/admin/getForm",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"getForm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST LOGIN ADMIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\" : \"munirosiroja1234@gmail.com\",\n    \"password\":\"1234567\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/admin/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST LOGIN",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"munirosiroja@gmail.com\",\n    \"password\":\"1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "204"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"cc-E2Xy2rWaYp3lKmSzpdIwMHRrGz0\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 30 Dec 2022 02:17:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Success\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11bmlyb3Npcm9qYUBnbWFpbC5jb20iLCJpYXQiOjE2NzIzNjY2NTcsImV4cCI6MTY3Mjc5ODY1N30.28n32bXf2j3tolx5211FcBnHcRwu5vrWpstexryO5_Q\"\n}"
+				}
+			]
+		}
+	]
+}
